@@ -1,8 +1,8 @@
 alias Project.Repo
 alias Project.Management.Flight
 
-Repo.delete! %Flight{
-  id: 2,
+Repo.insert! %Flight{
+  id: 9,
   origin: "SVO",
   destination: "BKK",
   departureDate: "20210701",

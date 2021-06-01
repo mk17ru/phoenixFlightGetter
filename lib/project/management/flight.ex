@@ -10,6 +10,7 @@ defmodule Project.Management.Flight do
     field :destination, :string
     field :number, :string
     field :origin, :string
+    @primary_key {:id, :binary_id, autogenerate: true}
     timestamps()
   end
 
