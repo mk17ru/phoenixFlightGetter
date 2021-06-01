@@ -2,8 +2,6 @@ alias Project.Repo
 alias Project.Management.Flight
 
 Repo.insert! %Flight{
-  
-  id: 9,
   origin: "SVO",
   destination: "BKK",
   departureDate: "20210701",
