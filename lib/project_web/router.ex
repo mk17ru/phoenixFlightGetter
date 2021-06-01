@@ -13,16 +13,17 @@ defmodule ProjectWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", ProjectWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
+  pipeline :json_api do
+    plug :accepts, ["json-api"]
+    plug JaSerializer.Deserializer
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", ProjectWeb do
-  #   pipe_through :api
-  # end
+   scope "/", ProjectWeb do
+     pipe_through :json_api
+     resources "/flights", FlightController, only: [:index, :show, :create, :delete]
+   end
+
 
   # Enables LiveDashboard only for development
   #
@@ -31,12 +32,12 @@ defmodule ProjectWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
-
-    scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: ProjectWeb.Telemetry
-    end
-  end
+#  if Mix.env() in [:dev, :test] do
+#    import Phoenix.LiveDashboard.Router
+#
+#    scope "/" do
+#      pipe_through :browser
+#      live_dashboard "/dashboard", metrics: ProjectWeb.Telemetry
+#    end
+#  end
 end
