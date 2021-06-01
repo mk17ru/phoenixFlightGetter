@@ -3,7 +3,6 @@ defmodule Project.Management.Flight do
   import Ecto.Changeset
 
   schema "flights" do
-    field :id
     field :arrivalDate, :string
     field :arrivalTime, :string
     field :departureDate, :string

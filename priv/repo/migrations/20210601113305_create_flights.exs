@@ -10,6 +10,7 @@ defmodule Project.Repo.Migrations.CreateFlights do
       add :arrivalDate, :string
       add :arrivalTime, :string
       add :number, :string
+      add :id, autogenerate: false
       timestamps()
     end
 
