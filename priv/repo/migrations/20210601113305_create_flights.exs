@@ -15,3 +15,4 @@ defmodule Project.Repo.Migrations.CreateFlights do
 
   end
 end
+
