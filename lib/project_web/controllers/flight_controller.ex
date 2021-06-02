@@ -8,7 +8,7 @@ defmodule ProjectWeb.FlightController do
 
   def index(conn, _params) do
     flights = Management.list_flights()
-    render(conn, "index.json", flights: flights)
+    render(conn, "index.json", data: flights)
   end
 
   def create(conn, %{"flight" => flight_params}) do
@@ -16,20 +16,20 @@ defmodule ProjectWeb.FlightController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.flight_path(conn, :show, flight))
-      |> render("show.json", flight: flight)
+      |> render("show.json", data: flight)
     end
   end
 
   def show(conn, %{"id" => id}) do
     flight = Management.get_flight!(id)
-    render(conn, "show.json", flight: flight)
+    render(conn, "show.json", data: flight)
   end
 
   def update(conn, %{"id" => id, "flight" => flight_params}) do
     flight = Management.get_flight!(id)
 
     with {:ok, %Flight{} = flight} <- Management.update_flight(flight, flight_params) do
-      render(conn, "show.json", flight: flight)
+      render(conn, "show.json", data: flight)
     end
   end
 
